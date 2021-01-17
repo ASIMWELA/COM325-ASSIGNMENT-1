@@ -87,7 +87,37 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # using stack in oder to facilitate the search from from the last visited Node
+    state_actions = util.Stack()
+
+    # initialise the explored node to empty
+    # i.e No node is visited in the initial state
+    visited_nodes = []
+    # Make an empty list of actions
+    action_list = []
+
+    # initialize the first state to the stark
+    state_actions.push((problem.getStartState(), action_list))
+
+    # loop through states
+    while state_actions:
+        node, actions = state_actions.pop()
+
+        # check if node is not already visited  and then add it to the visited after being explored
+        if not node in visited_nodes:
+            visited_nodes.append(node)
+
+            # return actions if the current node is the goal
+            if problem.isGoalState(node):
+
+                # actual return here
+                return actions
+
+            for successor in problem.getSuccessors(node):
+                coordinate, direction, cost = successor
+                nextActions = actions + [direction]
+                state_actions.push((coordinate, nextActions))
+    return []
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
