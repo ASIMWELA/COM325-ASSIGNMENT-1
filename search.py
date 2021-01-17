@@ -181,6 +181,7 @@ def uniformCostSearch(problem):
                 state_actions.push((coordinate, nextActions), nextCost)
     return []
 
+
 def nullHeuristic(state, problem=None):
     """
     A heuristic function estimates the cost from the current state to the nearest
